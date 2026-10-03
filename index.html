@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مراجعة واختبار ENGL 101 - Quiz 1 | كليات الرؤية</title>
+  <style>
+    :root {
+      --primary: #0d3b36;
+      --primary-dark: #072522;
+      --gold: #c59b27;
+      --gold-light: #f7e7b4;
+      --light-bg: #f8faf9;
+      --card-bg: #ffffff;
+      --text-dark: #1f2937;
+      --text-muted: #4b5563;
+      --border-color: #e5e7eb;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.7;
+      padding: 20px 10px;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 32px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .header h1 { font-size: 25px; margin-bottom: 8px; font-weight: 800; color: #fff; }
+    .header p { color: var(--gold-light); font-size: 15px; margin-bottom: 12px; font-weight: 600; }
+    .header-badge {
+      display: inline-block;
+      background: rgba(197, 155, 39, 0.2);
+      border: 1px solid var(--gold);
+      color: #fff;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      background: #eef3f2;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 16px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .tab-pane { display: none; padding: 25px; }
+    .tab-pane.active { display: block; }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .info-card {
+      background: #fdfefe;
+      border: 1px solid #e1ebe9;
+      border-right: 4px solid var(--gold);
+      padding: 12px 14px;
+      border-radius: 8px;
+    }
+
+    .info-card h4 { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    .info-card p { font-size: 14px; font-weight: 700; color: var(--primary); }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 25px 0 15px 0;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #eef3f2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 20px;
+      background: var(--gold);
+      border-radius: 4px;
+    }
+
+    .passage-box {
+      background: #fbfdfc;
+      border: 1px solid #d5e5e2;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 25px;
+    }
+
+    .passage-para {
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed #e1ebe9;
+    }
+    .passage-para:last-child { margin-bottom: 0; padding-bottom: 0; border: none; }
+
+    .en-text {
+      direction: ltr;
+      text-align: left;
+      font-size: 14.5px;
+      color: #1a202c;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .ar-text { direction: rtl; font-size: 13.5px; color: #4a5568; }
+
+    .study-item {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+
+    .item-header { font-weight: 700; color: var(--primary); margin-bottom: 8px; font-size: 14.5px; }
+
+    .answer-tag {
+      display: inline-block;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .rule-box {
+      background: #fffdf5;
+      border-right: 4px solid var(--gold);
+      padding: 8px 12px;
+      margin-top: 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #78350f;
+    }
+
+    .student-info-form {
+      background: #f0f7f5;
+      border: 1px solid #cce3dc;
+      padding: 18px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .form-control:focus { outline: none; border-color: var(--primary); }
+
+    .quiz-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .quiz-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+    }
+
+    .q-num { font-weight: 800; color: var(--primary); font-size: 14px; }
+    .q-points { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 11px; color: #64748b; }
+
+    .quiz-question-en {
+      direction: ltr;
+      text-align: left;
+      font-weight: 700;
+      font-size: 14.5px;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .quiz-question-ar { color: #475569; font-size: 13px; margin-bottom: 12px; }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      direction: ltr;
+      text-align: left;
+    }
+    .option-label:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .option-label input[type="radio"] { margin-right: 10px; accent-color: var(--primary); }
+    .option-text { font-size: 13.5px; font-weight: 500; color: #1e293b; }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: 800;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(13, 59, 54, 0.2);
+    }
+
+    #result-box {
+      display: none;
+      padding: 25px;
+      text-align: center;
+      background: #f8faf9;
+      border-radius: 12px;
+      border: 2px solid var(--primary);
+      margin-top: 25px;
+    }
+
+    .score-circle {
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 24px;
+      font-weight: 800;
+      border: 4px solid var(--gold);
+    }
+    .score-circle span { font-size: 11px; color: #fff; }
+
+    .certificate-wrapper {
+      margin-top: 25px;
+      padding: 25px;
+      border: 6px double var(--gold);
+      background: #fffdf8;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .cert-header { font-size: 22px; color: var(--primary); font-weight: 900; margin-bottom: 4px; }
+    .cert-sub { color: var(--gold); font-weight: 700; font-size: 15px; margin-bottom: 16px; }
+    .cert-body { font-size: 15px; line-height: 2; color: #334155; margin-bottom: 20px; }
+    .cert-student-name { font-size: 20px; font-weight: 800; color: var(--primary); text-decoration: underline; }
+    
+    .cert-footer-grid {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px dashed #cbd5e1;
+    }
+    .cert-stamp {
+      border: 2px dashed var(--gold);
+      padding: 6px 14px;
+      border-radius: 50px;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .btn-print {
+      margin-top: 15px;
+      background: var(--gold);
+      color: var(--primary-dark);
+      padding: 8px 18px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .trainer-footer {
+      text-align: center;
+      padding: 14px;
+      font-size: 12px;
+      color: #64748b;
+      background: #f1f5f9;
+      border-top: 1px solid #e2e8f0;
+      line-height: 1.6;
+    }
+    .trainer-footer strong { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>كليات الرؤية | VISION COLLEGES</h1>
+    <p>English Language 1 (ENGL 101) - Quiz 1 Comprehensive Study & Assessment</p>
+    <div class="header-badge">Unit 1: Marketing - Why Does Something Become Popular?</div>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('study')">
+      📖 الشرح ومراجعة الأسئلة (Study Guide)
+    </button>
+    <button class="tab-btn" onclick="switchTab('quiz')">
+      ✍️ الاختبار الإلكتروني والشهادة (Quiz & Certificate)
+    </button>
+  </div>
+
+  <!-- TAB 1: STUDY -->
+  <div id="study-tab" class="tab-pane active">
+    <div class="overview-grid">
+      <div class="info-card">
+        <h4>المقرر والكتاب</h4>
+        <p>Q: Skills for Success 2 (4th Ed.)</p>
+      </div>
+      <div class="info-card">
+        <h4>عدد الأسئلة والزمن</h4>
+        <p>20 سؤالاً | 30 دقيقة</p>
+      </div>
+      <div class="info-card">
+        <h4>الدرجة الإجمالية</h4>
+        <p>5 درجات (0.25 لكل سؤال)</p>
+      </div>
+      <div class="info-card">
+        <h4>نظام الأسئلة</h4>
+        <p>اختياري (MCQ) وصح/خطأ (T/F)</p>
+      </div>
+    </div>
+
+    <!-- PART A -->
+    <div class="section-title">Part A: Reading Comprehension (قطع الفهم والاستيعاب)</div>
+    <div class="passage-box">
+      <div class="passage-para">
+        <div class="en-text"><strong>Paragraph 1:</strong> Last semester, a small company introduced a reusable water bottle for university students. At first, sales were slow because the bottle looked similar to many others. The company could not afford a large advertising campaign, so it invited ten students to test the bottle and share honest opinions.</div>
+        <div class="ar-text"><strong>الترجمة:</strong> في الفصل الدراسي الماضي، طرحت شركة صغيرة زجاجة مياه قابلة لإعادة الاستخدام لطلاب الجامعة. في البداية، كانت المبيعات بطيئة لأن شكل الزجاجة كان مشابهاً للعديد من الزجاجات الأخرى. لم تكن الشركة قادرة على تحمل تكلفة حملة إعلانية ضخمة، لذلك دعت عشرة طلاب لتجربة الزجاجة ومشاركة آرائهم الصادقة.</div>
+      </div>
+      <div class="passage-para">
+        <div class="en-text"><strong>Paragraph 2:</strong> Several students posted short videos showing that the bottle kept water cold through long classes. One video compared it with a thin plastic cup and was shared thousands of times. Soon, the bottle's bright blue color appeared in many campus photographs, making the product easy to recognize.</div>
+        <div class="ar-text"><strong>الترجمة:</strong> نشر العديد من الطلاب مقاطع فيديو قصيرة توضح أن الزجاجة تحافظ على الماء بارداً طوال المحاضرات الطويلة. وقارن أحد الفيديوهات بينها وبين كوب بلاستيكي خفيف وتمت مشاركته آلاف المرات. وسرعان ما ظهر لون الزجاجة الأزرق اللامع في العديد من صور الحرم الجامعي، مما جعل التعرف على المنتج سهلاً.</div>
+      </div>
+      <div class="passage-para">
+        <div class="en-text"><strong>Paragraph 3:</strong> Within two months, local shops sold out. The company had not lowered the price or changed the design. Students trusted the experiences of other students, and their posts helped the idea spread. The campaign showed that real users can sometimes influence buyers more effectively than expensive advertisements.</div>
+        <div class="ar-text"><strong>الترجمة:</strong> وفي غضون شهرين، نفدت الكمية من المتاجر المحلية. لم تقم الشركة بخفض السعر أو تغيير التصميم. وثق الطلاب بتجارب زملائهم الطلاب، وساعدت منشوراتهم في انتشار الفكرة. أظهرت الحملة أن المستخدمين الحقيقيين يمكنهم في بعض الأحيان التأثير على المشترين بشكل أكثر فعالية من الإعلانات المكلفة.</div>
+      </div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 1: Central Message (الفكرة الرئيسية)</div>
+      <div class="en-text">Which statement best expresses the central message of the article?</div>
+      <div class="ar-text">أي عبارة تعبر بأفضل شكل عن الرسالة/الفكرة الأساسية للمقال؟</div>
+      <div class="answer-tag">الإجابة: B. Student experiences helped an ordinary product become popular.</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> المقال يوضح كيف استطاعت تجارب ومنشورات الطلاب تحويل منتج بطيء المبيعات إلى منتج واسع الانتشار دون تخفيض السعر.</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 2: Detail Question (تفاصيل النص)</div>
+      <div class="en-text">Why did the company invite ten students to test the bottle?</div>
+      <div class="ar-text">لماذا دعت الشركة عشرة طلاب لاختبار الزجاجة؟</div>
+      <div class="answer-tag">الإجابة: C. It had limited advertising money and wanted honest opinions.</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> ورد نصاً في الفقرة الأولى: (The company could not afford a large advertising campaign, so it invited ten students...).</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 3: Vocabulary in Context (المعنى من السياق)</div>
+      <div class="en-text">In paragraph 3, the word <strong>influence</strong> is closest in meaning to:</div>
+      <div class="ar-text">في الفقرة الثالثة، كلمة influence (يؤثر على) مرادفها الأقرب هو:</div>
+      <div class="answer-tag">الإجابة: A. affect</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> كلمة influence تعني التأثير على القرارات، ومترادفها affect.</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 4: True / False</div>
+      <div class="en-text">The company reduced the bottle's price before local shops sold out.</div>
+      <div class="ar-text">قامت الشركة بتخفيض سعر الزجاجة قبل نفادها من المتاجر المحلية.</div>
+      <div class="answer-tag">الإجابة: False (خطأ)</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> مذكور نصاً في الفقرة 3: (The company had not lowered the price).</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 5: True / False</div>
+      <div class="en-text">The article suggests that real customer experiences can be a powerful marketing tool.</div>
+      <div class="ar-text">يقترح المقال أن تجارب العملاء الحقيقيين أداة تسويقية قوية.</div>
+      <div class="answer-tag">الإجابة: True (صح)</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> مطابق للجملة الأخيرة في المقال.</div>
+    </div>
+
+    <!-- PART B -->
+    <div class="section-title">Part B: Unit 1 Vocabulary (المفردات المقررة)</div>
+
+    <div class="study-item">
+      <div class="item-header">Question 6: Phrasal Verb</div>
+      <div class="en-text">The company interviewed students to _____ which design they preferred.</div>
+      <div class="ar-text">أجرت الشركة مقابلات مع الطلاب لكي _____ أي تصميم يفضلونه.</div>
+      <div class="answer-tag">الإجابة: B. find out</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> find out تعني "يكتشف أو يتعرف على معلومة".</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 7: Target Vocabulary</div>
+      <div class="en-text">A popular student account helped the news about the new campus cafe _____ .</div>
+      <div class="ar-text">ساعد حساب طلابي شهير أخبار المقهى الجامعي الجديد على أن _____ .</div>
+      <div class="answer-tag">الإجابة: A. spread</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> spread تعني "تنتشر".</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 8: Target Vocabulary</div>
+      <div class="en-text">The instructions were _____ so every student understood what to do.</div>
+      <div class="ar-text">كانت التعليمات _____ ولذلك فهم كل طالب ما يجب فعله.</div>
+      <div class="answer-tag">الإجابة: D. clear</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> clear تعني "واضحة".</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 9: Target Vocabulary</div>
+      <div class="en-text">Each team member should _____ one useful idea to the marketing plan.</div>
+      <div class="ar-text">ينبغي على كل عضو في الفريق أن _____ بفكرة مفيدة لخطة التسويق.</div>
+      <div class="answer-tag">الإجابة: C. contribute</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> contribute تعني "يساهم / يشارك".</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 10: Definition (True / False)</div>
+      <div class="en-text">A trend is a general direction in which something is developing or becoming common.</div>
+      <div class="ar-text">الـ (trend / النمط الشائع أو الترند) هو اتجاه عام يتطور فيه شيء ما أو يصبح شائعاً.</div>
+      <div class="answer-tag">الإجابة: True (صح)</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> التعريف المقرر لكلمة trend.</div>
+    </div>
+
+    <!-- PART C -->
+    <div class="section-title">Part C: Connectors & Punctuation (الروابط وعلامات الترقيم)</div>
+
+    <div class="study-item">
+      <div class="item-header">Question 11: Contrast Connector</div>
+      <div class="en-text">The poster was simple, _____ it attracted a great deal of attention.</div>
+      <div class="ar-text">كان الملصق بسيطاً، _____ أنه جذب قدراً كبيراً من الاهتمام.</div>
+      <div class="answer-tag">الإجابة: B. but</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> but تعبر عن التناقض وتسبقها فاصلة.</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 12: Punctuation with "Because"</div>
+      <div class="en-text">Which sentence is punctuated correctly?</div>
+      <div class="ar-text">أي الجمل التالية رُقمت علامات ترقيمها بشكل صحيح؟</div>
+      <div class="answer-tag">الإجابة: B. Because the message was easy to remember, many students repeated it.</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> إذا بدأت الجملة بـ Because نضع فاصلة (comma ,) بين الجملتين.</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 13: Punctuation with "However"</div>
+      <div class="en-text">Which sentence uses however correctly?</div>
+      <div class="ar-text">أي الجمل التالية تستخدم however بترقيم صحيح؟</div>
+      <div class="answer-tag">الإجابة: A. The shop expected low sales; however, the product sold out.</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> نضع قبل however فاصلة منقوطة (;) وبعدها فاصلة (,).</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 14: Time Connector</div>
+      <div class="en-text">_____ the video appeared online, customer orders increased.</div>
+      <div class="ar-text">_____ ظهر الفيديو على الإنترنت، زادت طلبات العملاء.</div>
+      <div class="answer-tag">الإجابة: C. When</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> When رابط زمني بمعنى (عندما/حينما).</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 15: Result Connector (True / False)</div>
+      <div class="en-text">The connector so can introduce a result, as in: The advertisement was effective, so sales increased.</div>
+      <div class="ar-text">أداة الربط so تقدم نتيجة كما في المثال.</div>
+      <div class="answer-tag">الإجابة: True (صح)</div>
+      <div class="rule-box">💡 <strong>الشرح:</strong> so تعني "لذلك" وتفيد النتيجة (Result).</div>
+    </div>
+
+    <!-- PART D -->
+    <div class="section-title">Part D: Imperatives (صيغ الأمر والتعليمات)</div>
+
+    <div class="study-item">
+      <div class="item-header">Question 16: Negative Imperative</div>
+      <div class="en-text">Which sentence is a correct negative imperative?</div>
+      <div class="ar-text">أي الجمل التالية صيغة أمر منفي صحيحة؟</div>
+      <div class="answer-tag">الإجابة: C. Don't close the quiz before you submit.</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> يبدأ النهي دائماً بـ Don't + مصدر الفعل.</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 17: Polite Instruction</div>
+      <div class="en-text">Choose the correctly written polite instruction.</div>
+      <div class="ar-text">اختر التعليمات المهذبة الصحيحة.</div>
+      <div class="answer-tag">الإجابة: A. Please check your student number before you begin.</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> بعد Please يأتي الفعل في المصدر المجرد.</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 18: Suggestion with "Let's"</div>
+      <div class="en-text">Which sentence gives a correct suggestion?</div>
+      <div class="ar-text">أي الجمل تقدم اقتراحاً صحيحاً نحوياً؟</div>
+      <div class="answer-tag">الإجابة: B. Let's compare the two product designs.</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> بعد Let's يأتي المصدر المجرد (compare).</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 19: Imperative Warning</div>
+      <div class="en-text">Complete the warning: _____ your password private.</div>
+      <div class="ar-text">أكمل صيغة التحذير: _____ كلمة مرورك سرية.</div>
+      <div class="answer-tag">الإجابة: C. Keep</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> يبدأ الأمر بالمصدر المجرد (Keep).</div>
+    </div>
+
+    <div class="study-item">
+      <div class="item-header">Question 20: Negative Suggestion (True / False)</div>
+      <div class="en-text">"Let's not share answers during the quiz" is a grammatically correct negative suggestion.</div>
+      <div class="ar-text">العبارة تمثل اقتراحاً منفياً صحيحاً نحوياً.</div>
+      <div class="answer-tag">الإجابة: True (صح)</div>
+      <div class="rule-box">💡 <strong>القاعدة:</strong> صيغة الاقتراح المنفي: Let's not + المصدر.</div>
+    </div>
+
+  </div>
+
+  <!-- TAB 2: ONLINE TEST -->
+  <div id="quiz-tab" class="tab-pane">
+    <div class="student-info-form">
+      <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 16px;">بيانات الطالب للاختبار وإصدار الشهادة</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+        <div class="form-group">
+          <label>اسم الطالب / Student Name:</label>
+          <input type="text" id="studentNameInput" class="form-control" placeholder="اكتب اسم الطالب هنا..." required>
+        </div>
+        <div class="form-group">
+          <label>كلية الرؤية / Vision Colleges:</label>
+          <input type="text" id="collegeInput" class="form-control" value="كليات الرؤية - Vision Colleges" readonly>
+        </div>
+      </div>
+    </div>
+
+    <form id="onlineQuizForm" onsubmit="evaluateQuiz(event)">
+      <div class="passage-box" style="margin-bottom: 20px;">
+        <h4 style="color: var(--primary); margin-bottom: 8px; font-size: 14px;">Reading Passage: The Bottle Everyone Recognized</h4>
+        <div class="en-text" style="font-size: 13px; line-height: 1.6;">
+          (1) Last semester, a small company introduced a reusable water bottle for university students. At first, sales were slow because the bottle looked similar to many others. The company could not afford a large advertising campaign, so it invited ten students to test the bottle and share honest opinions.<br>
+          (2) Several students posted short videos showing that the bottle kept water cold through long classes. One video compared it with a thin plastic cup and was shared thousands of times. Soon, the bottle's bright blue color appeared in many campus photographs, making the product easy to recognize.<br>
+          (3) Within two months, local shops sold out. The company had not lowered the price or changed the design. Students trusted the experiences of other students, and their posts helped the idea spread. The campaign showed that real users can sometimes influence buyers more effectively than expensive advertisements.
+        </div>
+      </div>
+
+      <!-- Q1 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">1. Part A: Reading</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Which statement best expresses the central message of the article?</div>
+        <div class="quiz-question-ar">أي عبارة تعبر بأفضل شكل عن الفكرة الأساسية للمقال؟</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q1" value="A"><span class="option-text">A. Companies must lower prices to attract university students.</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="B"><span class="option-text">B. Student experiences helped an ordinary product become popular.</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="C"><span class="option-text">C. Plastic cups are more useful than reusable bottles.</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="D"><span class="option-text">D. A bright color always guarantees a product's success.</span></label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">2. Part A: Reading</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Why did the company invite ten students to test the bottle?</div>
+        <div class="quiz-question-ar">لماذا دعت الشركة عشرة طلاب لاختبار الزجاجة؟</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q2" value="A"><span class="option-text">A. It wanted the students to select a new color.</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="B"><span class="option-text">B. It planned to open shops on the university campus.</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="C"><span class="option-text">C. It had limited advertising money and wanted honest opinions.</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="D"><span class="option-text">D. It needed students to compare prices in local shops.</span></label>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">3. Part A: Reading</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">In paragraph 3, the word <strong>influence</strong> is closest in meaning to:</div>
+        <div class="quiz-question-ar">في الفقرة الثالثة، كلمة influence الأقرب لها في المعنى:</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q3" value="A"><span class="option-text">A. affect</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="B"><span class="option-text">B. avoid</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="C"><span class="option-text">C. count</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="D"><span class="option-text">D. purchase</span></label>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">4. Part A: Reading (True / False)</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">The company reduced the bottle's price before local shops sold out.</div>
+        <div class="quiz-question-ar">خفضت الشركة السعر قبل نفاد الكمية من المتاجر.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q4" value="True"><span class="option-text">True (صح)</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="False"><span class="option-text">False (خطأ)</span></label>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">5. Part A: Reading (True / False)</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">The article suggests that real customer experiences can be a powerful marketing tool.</div>
+        <div class="quiz-question-ar">تجارب العملاء الحقيقيين أداة تسويق قوية.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q5" value="True"><span class="option-text">True (صح)</span></label>
+          <label class="option-label"><input type="radio" name="q5" value="False"><span class="option-text">False (خطأ)</span></label>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">6. Part B: Vocabulary</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">The company interviewed students to _____ which design they preferred.</div>
+        <div class="quiz-question-ar">أجرت الشركة مقابلات مع الطلاب لكي _____ أي تصميم يفضلونه.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q6" value="A"><span class="option-text">A. turn off</span></label>
+          <label class="option-label"><input type="radio" name="q6" value="B"><span class="option-text">B. find out</span></label>
+          <label class="option-label"><input type="radio" name="q6" value="C"><span class="option-text">C. give up</span></label>
+          <label class="option-label"><input type="radio" name="q6" value="D"><span class="option-text">D. look after</span></label>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">7. Part B: Vocabulary</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">A popular student account helped the news about the new campus cafe _____ .</div>
+        <div class="quiz-question-ar">ساعد حساب طلابي شهير أخبار المقهى الجامعي الجديد على أن _____ .</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q7" value="A"><span class="option-text">A. spread</span></label>
+          <label class="option-label"><input type="radio" name="q7" value="B"><span class="option-text">B. hide</span></label>
+          <label class="option-label"><input type="radio" name="q7" value="C"><span class="option-text">C. reduce</span></label>
+          <label class="option-label"><input type="radio" name="q7" value="D"><span class="option-text">D. separate</span></label>
+        </div>
+      </div>
+
+      <!-- Q8 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">8. Part B: Vocabulary</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">The instructions were _____ so every student understood what to do.</div>
+        <div class="quiz-question-ar">كانت التعليمات _____ ولذلك فهم كل طالب ما يجب فعله.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q8" value="A"><span class="option-text">A. private</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="B"><span class="option-text">B. ordinary</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="C"><span class="option-text">C. distant</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="D"><span class="option-text">D. clear</span></label>
+        </div>
+      </div>
+
+      <!-- Q9 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">9. Part B: Vocabulary</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Each team member should _____ one useful idea to the marketing plan.</div>
+        <div class="quiz-question-ar">ينبغي على كل عضو أن _____ بفكرة مفيدة لخطة التسويق.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q9" value="A"><span class="option-text">A. prevent</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="B"><span class="option-text">B. repeat</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="C"><span class="option-text">C. contribute</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="D"><span class="option-text">D. remove</span></label>
+        </div>
+      </div>
+
+      <!-- Q10 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">10. Part B: Vocabulary (True / False)</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">A trend is a general direction in which something is developing or becoming common.</div>
+        <div class="quiz-question-ar">الـ trend هو اتجاه عام يتطور فيه شيء ما أو يصبح شائعاً.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q10" value="True"><span class="option-text">True (صح)</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="False"><span class="option-text">False (خطأ)</span></label>
+        </div>
+      </div>
+
+      <!-- Q11 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">11. Part C: Connectors</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">The poster was simple, _____ it attracted a great deal of attention.</div>
+        <div class="quiz-question-ar">كان الملصق بسيطاً، _____ أنه جذب قدراً كبيراً من الاهتمام.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q11" value="A"><span class="option-text">A. because</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="B"><span class="option-text">B. but</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="C"><span class="option-text">C. so</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="D"><span class="option-text">D. when</span></label>
+        </div>
+      </div>
+
+      <!-- Q12 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">12. Part C: Connectors & Punctuation</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Which sentence is punctuated correctly?</div>
+        <div class="quiz-question-ar">أي الجمل التالية رُقمت علامات ترقيمها بشكل صحيح؟</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q12" value="A"><span class="option-text">A. Because the message was easy to remember many students repeated it.</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="B"><span class="option-text">B. Because the message was easy to remember, many students repeated it.</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="C"><span class="option-text">C. Because, the message was easy to remember many students repeated it.</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="D"><span class="option-text">D. Because the message, was easy to remember, many students repeated it.</span></label>
+        </div>
+      </div>
+
+      <!-- Q13 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">13. Part C: Connectors & Punctuation</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Which sentence uses <strong>however</strong> correctly?</div>
+        <div class="quiz-question-ar">أي الجمل التالية تستخدم however بترقيم صحيح؟</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q13" value="A"><span class="option-text">A. The shop expected low sales; however, the product sold out.</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="B"><span class="option-text">B. The shop expected low sales, however the product sold out.</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="C"><span class="option-text">C. The shop expected low sales however, the product sold out.</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="D"><span class="option-text">D. The shop expected low sales because, however, the product sold out.</span></label>
+        </div>
+      </div>
+
+      <!-- Q14 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">14. Part C: Connectors</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">_____ the video appeared online, customer orders increased.</div>
+        <div class="quiz-question-ar">_____ ظهر الفيديو على الإنترنت، زادت طلبات العملاء.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q14" value="A"><span class="option-text">A. But</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="B"><span class="option-text">B. So</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="C"><span class="option-text">C. When</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="D"><span class="option-text">D. However</span></label>
+        </div>
+      </div>
+
+      <!-- Q15 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">15. Part C: Connectors (True / False)</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">The connector <strong>so</strong> can introduce a result, as in: <em>The advertisement was effective, so sales increased.</em></div>
+        <div class="quiz-question-ar">أداة الربط so تقدم نتيجة كما في المثال أعلاه.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q15" value="True"><span class="option-text">True (صح)</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="False"><span class="option-text">False (خطأ)</span></label>
+        </div>
+      </div>
+
+      <!-- Q16 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">16. Part D: Imperatives</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Which sentence is a correct negative imperative?</div>
+        <div class="quiz-question-ar">أي الجمل التالية تمثل صيغة نهي/أمر منفي صحيحة؟</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q16" value="A"><span class="option-text">A. Not closing the quiz before you submit.</span></label>
+          <label class="option-label"><input type="radio" name="q16" value="B"><span class="option-text">B. Doesn't close the quiz before you submit.</span></label>
+          <label class="option-label"><input type="radio" name="q16" value="C"><span class="option-text">C. Don't close the quiz before you submit.</span></label>
+          <label class="option-label"><input type="radio" name="q16" value="D"><span class="option-text">D. You not close the quiz before you submit.</span></label>
+        </div>
+      </div>
+
+      <!-- Q17 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">17. Part D: Imperatives</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Choose the correctly written polite instruction.</div>
+        <div class="quiz-question-ar">اختر صيغة التعليمات المهذبة الصحيحة.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q17" value="A"><span class="option-text">A. Please check your student number before you begin.</span></label>
+          <label class="option-label"><input type="radio" name="q17" value="B"><span class="option-text">B. Please checking your student number before you begin.</span></label>
+          <label class="option-label"><input type="radio" name="q17" value="C"><span class="option-text">C. Please to check your student number before you begin.</span></label>
+          <label class="option-label"><input type="radio" name="q17" value="D"><span class="option-text">D. Please checks your student number before you begin.</span></label>
+        </div>
+      </div>
+
+      <!-- Q18 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">18. Part D: Imperatives</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Which sentence gives a correct suggestion?</div>
+        <div class="quiz-question-ar">أي الجمل التالية تقدم اقتراحاً صحيحاً نحوياً؟</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q18" value="A"><span class="option-text">A. Let's comparing the two product designs.</span></label>
+          <label class="option-label"><input type="radio" name="q18" value="B"><span class="option-text">B. Let's compare the two product designs.</span></label>
+          <label class="option-label"><input type="radio" name="q18" value="C"><span class="option-text">C. Let's compares the two product designs.</span></label>
+          <label class="option-label"><input type="radio" name="q18" value="D"><span class="option-text">D. Let's to compare the two product designs.</span></label>
+        </div>
+      </div>
+
+      <!-- Q19 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">19. Part D: Imperatives</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en">Complete the warning: _____ your password private.</div>
+        <div class="quiz-question-ar">أكمل صيغة التحذير: _____ كلمة مرورك سرية.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q19" value="A"><span class="option-text">A. Keeping</span></label>
+          <label class="option-label"><input type="radio" name="q19" value="B"><span class="option-text">B. Keeps</span></label>
+          <label class="option-label"><input type="radio" name="q19" value="C"><span class="option-text">C. Keep</span></label>
+          <label class="option-label"><input type="radio" name="q19" value="D"><span class="option-text">D. To keep</span></label>
+        </div>
+      </div>
+
+      <!-- Q20 -->
+      <div class="quiz-card">
+        <div class="quiz-card-header"><span class="q-num">20. Part D: Imperatives (True / False)</span><span class="q-points">0.25 Mark</span></div>
+        <div class="quiz-question-en"><em>"Let's not share answers during the quiz"</em> is a grammatically correct negative suggestion.</div>
+        <div class="quiz-question-ar">عبارة "دعونا لا نشارك الإجابات أثناء الاختبار" اقتراح منفي صحيح نحوياً.</div>
+        <div class="quiz-options">
+          <label class="option-label"><input type="radio" name="q20" value="True"><span class="option-text">True (صح)</span></label>
+          <label class="option-label"><input type="radio" name="q20" value="False"><span class="option-text">False (خطأ)</span></label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">تصحيح الاختبار وعرض النتيجة وإصدار الشهادة 🎓</button>
+    </form>
+
+    <!-- Results Box -->
+    <div id="result-box">
+      <div class="score-circle">
+        <div id="scoreText">5.00</div>
+        <span>من 5.00</span>
+      </div>
+      <h2 id="feedbackTitle" style="color: var(--primary); margin-bottom: 6px;">ممتاز جداً!</h2>
+      <p id="feedbackDetail" style="color: var(--text-muted); margin-bottom: 18px;">تم تصحيح إجاباتك بنجاح واحتساب الدرجة النهائية.</p>
+
+      <!-- Printable Certificate -->
+      <div class="certificate-wrapper" id="printableCertificate">
+        <div class="cert-header">كليات الرؤية | VISION COLLEGES</div>
+        <div class="cert-sub">CERTIFICATE OF ACHIEVEMENT | شهادة إنجاز واجتياز</div>
+        
+        <div class="cert-body">
+          تشهد إدارة المتابعة الأكاديمية بأن الطالب/ـة:<br>
+          <span class="cert-student-name" id="certName">اسم الطالب</span><br>
+          المقيد في: <strong>كلية الرؤية</strong><br>
+          قد أتم بنجاح المراجعة الشاملة والاختبار الإلكتروني لمقرر:<br>
+          <strong>English Language 1 (ENGL 101) - Quiz 1: Unit 1 (Marketing)</strong><br>
+          وحصل على درجة تقييم: <strong id="certScore" style="color: var(--primary); font-size: 17px;">5.00 من 5.00</strong>
+        </div>
+
+        <div class="cert-footer-grid">
+          <div>
+            <div style="font-size: 12px; color: #64748b;">تاريخ الإنجاز:</div>
+            <div style="font-weight: 700; color: var(--text-dark);" id="certDate">October 2026</div>
+          </div>
+          <div class="cert-stamp">معتمد أكاديمياً</div>
+          <div>
+            <div style="font-size: 12px; color: #64748b;">Trainer:</div>
+            <div style="font-weight: 800; color: var(--primary);">Mohammed Othman</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-print" onclick="window.print()">🖨️️ طباعة أو حفظ الشهادة كـ PDF</button>
+    </div>
+  </div>
+
+  <!-- Bottom Footer with Specified Information in Small Font -->
+  <div class="trainer-footer">
+    اسم الطالب / .................................... | كلية الرؤية | <strong>Trainer / Mohammed Othman</strong> | WhatsApp: 0530665625
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+    if (tabId === 'study') {
+      document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+      document.getElementById('study-tab').classList.add('active');
+    } else {
+      document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+      document.getElementById('quiz-tab').classList.add('active');
+    }
+  }
+
+  const answerKey = {
+    q1: "B", q2: "C", q3: "A", q4: "False", q5: "True",
+    q6: "B", q7: "A", q8: "D", q9: "C", q10: "True",
+    q11: "B", q12: "B", q13: "A", q14: "C", q15: "True",
+    q16: "C", q17: "A", q18: "B", q19: "C", q20: "True"
+  };
+
+  function evaluateQuiz(e) {
+    e.preventDefault();
+    const nameInput = document.getElementById('studentNameInput').value.trim();
+    if (!nameInput) {
+      alert("فضلاً اكتب اسم الطالب أولاً لإصدار الشهادة باسمك.");
+      document.getElementById('studentNameInput').focus();
+      return;
+    }
+
+    let correctCount = 0;
+    const form = document.getElementById('onlineQuizForm');
+    const formData = new FormData(form);
+
+    for (let i = 1; i <= 20; i++) {
+      const qKey = "q" + i;
+      const studentAns = formData.get(qKey);
+      if (studentAns === answerKey[qKey]) {
+        correctCount++;
+      }
+    }
+
+    const finalScore = (correctCount * 0.25).toFixed(2);
+    
+    document.getElementById('scoreText').innerText = finalScore;
+    document.getElementById('certName').innerText = nameInput;
+    document.getElementById('certScore').innerText = finalScore + " من 5.00 (" + correctCount + " / 20 إجابة صحيحة)";
+    
+    const today = new Date();
+    document.getElementById('certDate').innerText = today.toLocaleDateString('ar-SA');
+
+    const resultBox = document.getElementById('result-box');
+    resultBox.style.display = 'block';
+
+    const feedbackTitle = document.getElementById('feedbackTitle');
+    const feedbackDetail = document.getElementById('feedbackDetail');
+
+    if (finalScore >= 4.5) {
+      feedbackTitle.innerText = "🌟 أداء متميز ومبهر!";
+      feedbackTitle.style.color = "var(--primary)";
+      feedbackDetail.innerText = "تهانينا! لقد حققت درجة ممتازة تعكس فهمك واستيعابك الكامل لمقرر الاختبار.";
+    } else if (finalScore >= 3.0) {
+      feedbackTitle.innerText = "👍 أداء جيد جداً!";
+      feedbackTitle.style.color = "var(--gold)";
+      feedbackDetail.innerText = "نتيجة طيبة! راجع النقاط التي أخطأت فيها في تبويب الشرح لضمان الدرجة النهائية.";
+    } else {
+      feedbackTitle.innerText = "📚 بحاجة لمزيد من المراجعة";
+      feedbackTitle.style.color = "#dc2626";
+      feedbackDetail.innerText = "ننصحك بمراجعة شروحات القواعد والمفردات في تبويب المذاكرة ثم إعادة الاختبار.";
+    }
+
+    resultBox.scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
